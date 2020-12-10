@@ -2,8 +2,9 @@ var canvW, canvH;
 var tileW, tileH;
 var font;
 var d1, d2;
-var tiles = [];
 var players = [];
+var tiles = [];
+var properties = [];
 
 function preload() {
   //font = loadFont("https://github.com/googlefonts/Inconsolata/blob/master/fonts/otf/Inconsolata-Regular.otf");
@@ -28,8 +29,9 @@ function setup() {
   canvasDiv.style.marginLeft = "" + ((windowWidth - canvW) / 2 - getScrollbarWidth()) + "px";
   console.log(canvasDiv);
 
-  createTiles();
   createPlayers();
+  loadTiles();
+  createProperties();
 }
 
 function draw() {
@@ -77,7 +79,8 @@ function createPlayers() {
     "tile": 0,
     "money": 2000,
     "properties": [],
-    "jailCards": 0
+    "jailCards": 0,
+    "inPrison": false
     },
     {
     "name": "Deric",
@@ -86,26 +89,42 @@ function createPlayers() {
     "tile": 0,
     "money": 1999,
     "properties": [],
-    "jailCards": 0
+    "jailCards": 0,
+    "inPrison": false
     }
   ];
   console.log(players);
 }
 
-function createTiles() {
-  tiles = [
-    {
-      "name": "",
-      "color": "",
-      "type": "",
-      "x": "",
-      "y": "",
-      "shape": "",
-      "upgrades": [],
-      "rent": [],
-      "special": []
+function loadTiles() {
+  /*var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      tiles = JSON.parse(this.responseText);
     }
-  ];//List of all of the monopoly cards and locations - https://play-k.kaserver5.org/Monopoly/Database/USOff.html | https://en.wikipedia.org/wiki/Template:Monopoly_board_layout
+  };
+  xmlhttp.open("GET", "tiles.txt", true);
+  xmlhttp.send();*/
+  var json = $.getJSON("tiles.json");
+  tiles = eval("(" + json.responseText + ")");
+  console.log(tiles);
+  //List of all of the monopoly cards and locations - https://play-k.kaserver5.org/Monopoly/Database/USOff.html | https://en.wikipedia.org/wiki/Template:Monopoly_board_layout
+}
+
+function createProperties() {
+  properties = [
+    {
+      "owner": null,
+      "price": 0,
+      "upgrades": 0,
+      "ungradeCost": 0,
+      "rent": [],
+      "mortgaged": false,
+      "mortgage": 0,
+      "unmortgage": 0
+    }
+  ];
+  console.log(properties);
 }
 
 function rollDice() {

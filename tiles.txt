@@ -1,0 +1,18 @@
+{
+    "x": 0,
+    "y": 0,
+    "shape": "square",
+    "type": "go",
+    "property": null
+},
+{
+    "x": 0,
+    "y": 0,
+    "shape": "",
+    "type": "",
+    "property": {
+        "name": "",
+        "color": "",
+        "id": null
+    }
+}
