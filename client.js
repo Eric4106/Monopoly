@@ -1,37 +1,48 @@
-var canvW, canvH;
-var tileW, tileH;
+var canvasSize, canvasSize, scale;
 var font;
 var d1, d2;
 var players = [];
 var tiles = [];
 var properties = [];
+var chest = [];
+var chance = [];
+var turn = 0;
 
 function preload() {
   //font = loadFont("https://github.com/googlefonts/Inconsolata/blob/master/fonts/otf/Inconsolata-Regular.otf");
   //font = loadFont("Inconsolata-Regular.otf");
   font = new p5.Font("Inconsolata-Regular.otf");
-  console.log(font);
+  //console.log(font);
 }
 
 function setup() {
-  canvW = windowWidth * .5;
-  canvH = windowWidth * .5;
-  canvH -= canvH % 13;
-  canvW -= canvW % 13;
-  tileW = canvW / 13;
-  tileH = (canvW * 2) / 13;
+  canvasSize = windowWidth * .5;
+  canvasSize -= canvasSize % 13;
+  scale = canvasSize / 13;
 
-  var canvas = createCanvas(canvW, canvH);
+  var canvas = createCanvas(canvasSize, canvasSize);
   canvas.parent("Canvas");
   var canvasDiv = document.getElementById("Canvas");
-  canvasDiv.style.width = "" + canvW + "px";
-  canvasDiv.style.height = "" + canvH + "px";
-  canvasDiv.style.marginLeft = "" + ((windowWidth - canvW) / 2 - getScrollbarWidth()) + "px";
-  console.log(canvasDiv);
+  canvasDiv.style.width = "" + canvasSize + "px";
+  canvasDiv.style.height = "" + canvasSize + "px";
+  canvasDiv.style.marginLeft = "" + ((windowWidth - canvasSize) / 2 - getScrollbarWidth()) + "px";
+  //console.log(canvasDiv);
 
-  createPlayers();
-  loadTiles();
-  createProperties();
+  players = loadPlayers();
+  tiles = loadTiles();
+  properties = loadProperties();
+  chest = loadChest();
+  chance = loadChance();
+  console.log("players");
+  console.log(players);
+  console.log("tiles");
+  console.log(tiles);
+  console.log("properties");
+  console.log(properties);
+  console.log("chest");
+  console.log(chest);
+  console.log("chance");
+  console.log(chance);
 }
 
 function draw() {
@@ -41,90 +52,32 @@ function draw() {
   stroke(24);
   fill(150, 255, 200);
   for (let i = 2; i < 11; i++) {
-    rect(i * tileW, 0, tileW, tileH);
-    rect(i * tileW, 11 * tileW, tileW, tileH);
-    rect(0, i * tileW, tileH, tileW);
-    rect(11 * tileW, i * tileW, tileH, tileW);
+    rect(i * scale, 0, scale, 2 * scale);
+    rect(i * scale, 11 * scale, scale, 2 * scale);
+    rect(0, i * scale, 2 * scale, scale);
+    rect(11 * scale, i * scale, 2 * scale, scale);
   }
   for (let i = 0; i < 2; i++) {
     for (let j = 0; j < 2; j++) {
-      rect(i * 11 * tileW, j * 11 * tileW, tileH, tileH);
+      rect(i * 11 * scale, j * 11 * scale, 2 * scale, 2 * scale);
     }
   }
   strokeWeight(3);
-  rect(2 * tileW + 1, 2 * tileW + 1, 9 * tileW - 2, 9 * tileW - 2);
+  rect(2 * scale + 1, 2 * scale + 1, 9 * scale - 2, 9 * scale - 2);
 
   strokeWeight(1);
   fill(24);
   textFont("monospace", 16);
-  text("hello world!", canvW / 2, 300);
+  text("hello world!", canvasSize / 2, 300);
   textFont("monospace", 20);
-  text("test", canvW / 2, 350);
+  text("test", canvasSize / 2, 350);
   if (d1 != null) {
-    text("Dice rolled: " + d1 + " and " + d2 + " which sum to " + (d1 + d2), 150, 160);
-    console.log('dice text');
+    text("Dice rolled: " + d1 + " and " + d2 + " which sum to " + (d1 + d2), 2 * scale + 10, 2 * scale + 25);
   }
 
   strokeWeight(2);
   line(mouseX - 10, mouseY, mouseX + 10, mouseY);
   line(mouseX, mouseY - 10, mouseX, mouseY + 10);
-}
-
-function createPlayers() {
-  players = [
-    {
-    "name": "Eric",
-    "color": "#0ff",
-    "token": "cat",
-    "tile": 0,
-    "money": 2000,
-    "properties": [],
-    "jailCards": 0,
-    "inPrison": false
-    },
-    {
-    "name": "Deric",
-    "color": "#f00",
-    "token": "car",
-    "tile": 0,
-    "money": 1999,
-    "properties": [],
-    "jailCards": 0,
-    "inPrison": false
-    }
-  ];
-  console.log(players);
-}
-
-function loadTiles() {
-  /*var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      tiles = JSON.parse(this.responseText);
-    }
-  };
-  xmlhttp.open("GET", "tiles.txt", true);
-  xmlhttp.send();*/
-  var json = $.getJSON("tiles.json");
-  tiles = eval("(" + json.responseText + ")");
-  console.log(tiles);
-  //List of all of the monopoly cards and locations - https://play-k.kaserver5.org/Monopoly/Database/USOff.html | https://en.wikipedia.org/wiki/Template:Monopoly_board_layout
-}
-
-function createProperties() {
-  properties = [
-    {
-      "owner": null,
-      "price": 0,
-      "upgrades": 0,
-      "ungradeCost": 0,
-      "rent": [],
-      "mortgaged": false,
-      "mortgage": 0,
-      "unmortgage": 0
-    }
-  ];
-  console.log(properties);
 }
 
 function rollDice() {

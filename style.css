@@ -25,6 +25,11 @@ header {
     cursor: none;
 }
 
+button {
+    background-image: linear-gradient(to bottom, #8f8, #272);
+    border: 2px solid #5b5;
+}
+
 h1 {
     font-size: 48px;
     color: #181818;
