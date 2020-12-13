@@ -43,6 +43,8 @@ function setup() {
   console.log(chest);
   console.log("chance");
   console.log(chance);
+
+  console.log("SETUP FINISHED");
 }
 
 function draw() {
@@ -50,34 +52,87 @@ function draw() {
 
   strokeWeight(3);
   stroke(24);
+  tiles.forEach(tile => {
+    fill(150, 255, 200);
+    if (tile.shape == "square") square(tile.x * scale, tile.y * scale, 2 * scale);
+    else if (tile.shape == "vRectangle") rect(tile.x * scale, tile.y * scale, scale, 2 * scale);
+    else if (tile.shape == "hRectangle") rect(tile.x * scale, tile.y * scale, 2 * scale, scale);
+    if (tile.color != null) fill(tile.color);
+    else fill(150, 255, 200);
+    colorMode(HSB, 100);
+    //if (tile.color == "rainbow") fill(((Math.cos(frameCount / 500) / 2) + .5) * 100, 100, 100);
+    if (tile.color == "rainbow") fill((frameCount / 2) % 100, 75, 90);
+    rect(tile.smallBox.x * scale, tile.smallBox.y * scale, tile.smallBox.width * scale, tile.smallBox.height * scale);
+    colorMode(RGB, 255);
+  });
   fill(150, 255, 200);
-  for (let i = 2; i < 11; i++) {
-    rect(i * scale, 0, scale, 2 * scale);
-    rect(i * scale, 11 * scale, scale, 2 * scale);
-    rect(0, i * scale, 2 * scale, scale);
-    rect(11 * scale, i * scale, 2 * scale, scale);
-  }
-  for (let i = 0; i < 2; i++) {
-    for (let j = 0; j < 2; j++) {
-      rect(i * 11 * scale, j * 11 * scale, 2 * scale, 2 * scale);
-    }
-  }
   strokeWeight(3);
   rect(2 * scale + 1, 2 * scale + 1, 9 * scale - 2, 9 * scale - 2);
 
   strokeWeight(1);
   fill(24);
-  textFont("monospace", 16);
-  text("hello world!", canvasSize / 2, 300);
   textFont("monospace", 20);
-  text("test", canvasSize / 2, 350);
   if (d1 != null) {
     text("Dice rolled: " + d1 + " and " + d2 + " which sum to " + (d1 + d2), 2 * scale + 10, 2 * scale + 25);
   }
+  
+  drawChance();
+
+  textFont("georgia", scale / 3.6);
+  fill(24);
+  translate(.05 * scale, 6.385 * scale);
+  text("------------", 0, 0);
+  translate(0, scale / 6);
+  text(" | | | | | | | ", 0, 0);
+  translate(0, scale / 6);
+  text("------------", 0, 0);
+  translate(0, -2 * scale / 6);
+  translate(-.05 * scale, -6.385 * scale);
 
   strokeWeight(2);
   line(mouseX - 10, mouseY, mouseX + 10, mouseY);
   line(mouseX, mouseY - 10, mouseX, mouseY + 10);
+}
+
+function drawChance() {
+  colorMode(HSB, 100);
+  fill((frameCount / 2) % 100, 75, 90);
+  colorMode(RGB, 255);
+  textFont("georgia", scale);
+  
+  translate(4.25 * scale, 12.6 * scale);
+  text("?", 0, 0);
+  translate(-4.25 * scale, -12.6 * scale);
+
+  translate(3.75 * scale, .4 * scale);
+  rotate(Math.PI)
+  text("?", 0, 0);
+  rotate(-Math.PI)
+  translate(-3.75 * scale, -.4 * scale);
+
+  translate(12.6 * scale, 7.75 * scale);
+  rotate(Math.PI * 1.5);
+  text("?", 0, 0);
+  rotate(-Math.PI * 1.5);
+  translate(-12.6 * scale, -7.75 * scale);
+}
+
+function moveToFrom(tile, oldTile) {
+  if (tile < oldTile) {
+    moveToWith(tile, true);
+  }
+  else {
+    moveToWith(tile, false);
+  }
+}
+
+function moveToWith(tile, go) {
+  if (go) console.log("200")//players[turn].collect(200);
+  moveTo(tile);
+}
+
+function moveTo(tile) {
+  players[turn].tile = tile;
 }
 
 function rollDice() {
@@ -106,4 +161,14 @@ function getScrollbarWidth() {
   outer.parentNode.removeChild(outer);
 
   return scrollbarWidth;
+}
+
+function mousePressed(event) {
+  if (event.target.nodeName === "CANVAS") {
+    tiles.forEach(tile => {
+      if ((mouseX >= tile.smallBox.x * scale && mouseX <= (tile.smallBox.x + tile.smallBox.width) * scale) && (mouseY >= tile.smallBox.y * scale && mouseY <= (tile.smallBox.y + tile.smallBox.height) * scale)) {
+        console.log(tile);
+      }
+    });
+  }
 }
