@@ -18,7 +18,7 @@ function loadPlayers() {
                     if (properties[id].upgrades < 5) houses += properties[id].upgrades;
                     else if (properties[id].upgrades == 5) hotels++;
                 });
-                players[turn].collect((x * houses) + (y * hotels))
+                players[turn].pay((x * houses) + (y * hotels))
             }
         },
         {
@@ -39,7 +39,7 @@ function loadPlayers() {
                     if (properties[id].upgrades < 5) houses += properties[id].upgrades;
                     else if (properties[id].upgrades == 5) hotels++;
                 });
-                players[turn].collect((x * houses) + (y * hotels))
+                players[turn].pay((x * houses) + (y * hotels))
             }
         },
         {
@@ -60,7 +60,7 @@ function loadPlayers() {
                     if (properties[id].upgrades < 5) houses += properties[id].upgrades;
                     else if (properties[id].upgrades == 5) hotels++;
                 });
-                players[turn].collect((x * houses) + (y * hotels))
+                players[turn].pay((x * houses) + (y * hotels))
             }
         },
         {
@@ -81,7 +81,7 @@ function loadPlayers() {
                     if (properties[id].upgrades < 5) houses += properties[id].upgrades;
                     else if (properties[id].upgrades == 5) hotels++;
                 });
-                players[turn].collect((x * houses) + (y * hotels))
+                players[turn].pay((x * houses) + (y * hotels))
             }
         }
     ];
@@ -93,12 +93,7 @@ function loadTiles () {
         {
             "x": 11,
             "y": 11,
-            "smallBox": {
-                "x": 11,
-                "y": 11,
-                "width": 1,
-                "height": 1
-            },
+            "smallBox": null,
             "shape": "square",
             "type": "go",
             "color": "red",
@@ -124,12 +119,7 @@ function loadTiles () {
         {
             "x": 9,
             "y": 11,
-            "smallBox": {
-                "x": 9,
-                "y": 11,
-                "width": 1,
-                "height": .65
-            },
+            "smallBox": null,
             "shape": "vRectangle",
             "type": "chest",
             "color": "cyan",
@@ -203,12 +193,7 @@ function loadTiles () {
         {
             "x": 4,
             "y": 11,
-            "smallBox": {
-                "x": 4,
-                "y": 11,
-                "width": 1,
-                "height": .65
-            },
+            "smallBox": null,
             "shape": "vRectangle",
             "type": "chance",
             "color": "rainbow",
@@ -252,10 +237,10 @@ function loadTiles () {
             "x": 0,
             "y": 11,
             "smallBox": {
-                "x": 1,
+                "x": .75,
                 "y": 11,
-                "width": 1,
-                "height": 1
+                "width": 1.25,
+                "height": 1.25
             },
             "shape": "square",
             "type": "jail",
@@ -367,12 +352,7 @@ function loadTiles () {
         {
             "x": 0,
             "y": 4,
-            "smallBox": {
-                "x": 1.35,
-                "y": 4,
-                "width": .65,
-                "height": 1
-            },
+            "smallBox": null,
             "shape": "hRectangle",
             "type": "chest",
             "color": "cyan",
@@ -415,12 +395,7 @@ function loadTiles () {
         {
             "x": 0,
             "y": 0,
-            "smallBox": {
-                "x": 1,
-                "y": 1,
-                "width": 1,
-                "height": 1
-            },
+            "smallBox": null,
             "shape": "square",
             "type": "parking",
             "color": "white",
@@ -446,12 +421,7 @@ function loadTiles () {
         {
             "x": 3,
             "y": 0,
-            "smallBox": {
-                "x": 3,
-                "y": 1.35,
-                "width": 1,
-                "height": .65
-            },
+            "smallBox": null,
             "shape": "vRectangle",
             "type": "chance",
             "color": "rainbow",
@@ -579,12 +549,7 @@ function loadTiles () {
         {
             "x": 11,
             "y": 0,
-            "smallBox": {
-                "x": 11,
-                "y": 1,
-                "width": 1,
-                "height": 1
-            },
+            "smallBox": null,
             "shape": "square",
             "type": "toJail",
             "color": "dodgerBlue",
@@ -627,12 +592,7 @@ function loadTiles () {
         {
             "x": 11,
             "y": 4,
-            "smallBox": {
-                "x": 11,
-                "y": 4,
-                "width": .65,
-                "height": 1
-            },
+            "smallBox": null,
             "shape": "hRectangle",
             "type": "chest",
             "color": "cyan",
@@ -675,12 +635,7 @@ function loadTiles () {
         {
             "x": 11,
             "y": 7,
-            "smallBox": {
-                "x": 11,
-                "y": 7,
-                "width": .65,
-                "height": 1
-            },
+            "smallBox": null,
             "shape": "hRectangle",
             "type": "chance",
             "color": "rainbow",
