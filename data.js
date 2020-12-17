@@ -1,7 +1,7 @@
 function loadPlayers() {
     var players = [
         {
-            "name": "EricAlpha",
+            "name": "Andy",
             "color": "#0ff",
             "token": "cat",
             "tile": 0,
@@ -22,7 +22,7 @@ function loadPlayers() {
             }
         },
         {
-            "name": "EricGamma",
+            "name": "Brandy",
             "color": "#f00",
             "token": "car",
             "tile": 0,
@@ -43,7 +43,7 @@ function loadPlayers() {
             }
         },
         {
-            "name": "EricIota",
+            "name": "Candy",
             "color": "#0f0",
             "token": "dog",
             "tile": 0,
@@ -64,7 +64,7 @@ function loadPlayers() {
             }
         },
         {
-            "name": "EricOmicron",
+            "name": "Dandy",
             "color": "#00f",
             "token": "ship",
             "tile": 0,
@@ -702,7 +702,7 @@ function loadProperties() {
             "price": 60,
             "upgrades": 0,
             "ungradeCost": 50,
-            "rent": [2, 4, 10, 30, 90, 160, 250],
+            "rent": [2, 10, 30, 90, 160, 250],
             "mortgaged": false,
             "mortgage": 30,
             "unmortgage": 33
@@ -712,7 +712,7 @@ function loadProperties() {
             "price": 60,
             "upgrades": 0,
             "ungradeCost": 50,
-            "rent": [4, 8, 20, 60, 180, 320, 450],
+            "rent": [4, 20, 60, 180, 320, 450],
             "mortgaged": false,
             "mortgage": 30,
             "unmortgage": 33
@@ -722,7 +722,7 @@ function loadProperties() {
             "price": 100,
             "upgrades": 0,
             "ungradeCost": 50,
-            "rent": [6, 12, 30, 90, 270, 400, 550],
+            "rent": [6, 30, 90, 270, 400, 550],
             "mortgaged": false,
             "mortgage": 50,
             "unmortgage": 55
@@ -732,7 +732,7 @@ function loadProperties() {
             "price": 100,
             "upgrades": 0,
             "ungradeCost": 50,
-            "rent": [6, 12, 30, 90, 270, 400, 550],
+            "rent": [6, 30, 90, 270, 400, 550],
             "mortgaged": false,
             "mortgage": 50,
             "unmortgage": 55
@@ -742,7 +742,7 @@ function loadProperties() {
             "price": 120,
             "upgrades": 0,
             "ungradeCost": 50,
-            "rent": [8, 16, 40, 100, 300, 450, 600],
+            "rent": [8, 40, 100, 300, 450, 600],
             "mortgaged": false,
             "mortgage": 60,
             "unmortgage": 66
@@ -752,7 +752,7 @@ function loadProperties() {
             "price": 140,
             "upgrades": 0,
             "ungradeCost": 100,
-            "rent": [10, 20, 50, 150, 450, 625, 750],
+            "rent": [10, 50, 150, 450, 625, 750],
             "mortgaged": false,
             "mortgage": 80,
             "unmortgage": 88
@@ -762,7 +762,7 @@ function loadProperties() {
             "price": 140,
             "upgrades": 0,
             "ungradeCost": 100,
-            "rent": [10, 20, 50, 150, 450, 625, 750],
+            "rent": [10, 50, 150, 450, 625, 750],
             "mortgaged": false,
             "mortgage": 80,
             "unmortgage": 88
@@ -772,7 +772,7 @@ function loadProperties() {
             "price": 160,
             "upgrades": 0,
             "ungradeCost": 100,
-            "rent": [12, 24, 60, 180, 500, 700, 900],
+            "rent": [12, 60, 180, 500, 700, 900],
             "mortgaged": false,
             "mortgage": 80,
             "unmortgage": 88
@@ -782,7 +782,7 @@ function loadProperties() {
             "price": 180,
             "upgrades": 0,
             "ungradeCost": 100,
-            "rent": [14, 38, 70, 200, 550, 750, 950],
+            "rent": [14, 70, 200, 550, 750, 950],
             "mortgaged": false,
             "mortgage": 90,
             "unmortgage": 99
@@ -792,7 +792,7 @@ function loadProperties() {
             "price": 180,
             "upgrades": 0,
             "ungradeCost": 100,
-            "rent": [14, 38, 70, 200, 550, 750, 950],
+            "rent": [14, 70, 200, 550, 750, 950],
             "mortgaged": false,
             "mortgage": 90,
             "unmortgage": 99
@@ -802,7 +802,7 @@ function loadProperties() {
             "price": 200,
             "upgrades": 0,
             "ungradeCost": 100,
-            "rent": [16, 32, 80, 220, 600, 800, 1000],
+            "rent": [16, 80, 220, 600, 800, 1000],
             "mortgaged": false,
             "mortgage": 100,
             "unmortgage": 110
@@ -812,7 +812,7 @@ function loadProperties() {
             "price": 220,
             "upgrades": 0,
             "ungradeCost": 150,
-            "rent": [18, 36, 90, 250, 700, 875, 1050],
+            "rent": [18, 90, 250, 700, 875, 1050],
             "mortgaged": false,
             "mortgage": 110,
             "unmortgage": 121
@@ -822,7 +822,7 @@ function loadProperties() {
             "price": 220,
             "upgrades": 0,
             "ungradeCost": 150,
-            "rent": [18, 36, 90, 250, 700, 875, 1050],
+            "rent": [18, 90, 250, 700, 875, 1050],
             "mortgaged": false,
             "mortgage": 110,
             "unmortgage": 121
@@ -832,7 +832,7 @@ function loadProperties() {
             "price": 240,
             "upgrades": 0,
             "ungradeCost": 150,
-            "rent": [20, 40, 100, 300, 750, 925, 1100],
+            "rent": [20, 100, 300, 750, 925, 1100],
             "mortgaged": false,
             "mortgage": 120,
             "unmortgage": 132
@@ -842,7 +842,7 @@ function loadProperties() {
             "price": 260,
             "upgrades": 0,
             "ungradeCost": 150,
-            "rent": [22, 44, 110, 330, 800, 975, 1150],
+            "rent": [22, 110, 330, 800, 975, 1150],
             "mortgaged": false,
             "mortgage": 130,
             "unmortgage": 143
@@ -852,7 +852,7 @@ function loadProperties() {
             "price": 260,
             "upgrades": 0,
             "ungradeCost": 150,
-            "rent": [22, 44, 110, 330, 800, 975, 1150],
+            "rent": [22, 110, 330, 800, 975, 1150],
             "mortgaged": false,
             "mortgage": 130,
             "unmortgage": 143
@@ -862,7 +862,7 @@ function loadProperties() {
             "price": 280,
             "upgrades": 0,
             "ungradeCost": 150,
-            "rent": [24, 48, 120, 360, 850, 1025, 1200],
+            "rent": [24, 120, 360, 850, 1025, 1200],
             "mortgaged": false,
             "mortgage": 140,
             "unmortgage": 154
@@ -872,7 +872,7 @@ function loadProperties() {
             "price": 300,
             "upgrades": 0,
             "ungradeCost": 200,
-            "rent": [26, 52, 130, 390, 900, 1100, 1275],
+            "rent": [26, 130, 390, 900, 1100, 1275],
             "mortgaged": false,
             "mortgage": 150,
             "unmortgage": 165
@@ -882,7 +882,7 @@ function loadProperties() {
             "price": 300,
             "upgrades": 0,
             "ungradeCost": 200,
-            "rent": [26, 52, 130, 390, 900, 1100, 1275],
+            "rent": [26, 130, 390, 900, 1100, 1275],
             "mortgaged": false,
             "mortgage": 150,
             "unmortgage": 165
@@ -892,7 +892,7 @@ function loadProperties() {
             "price": 320,
             "upgrades": 0,
             "ungradeCost": 200,
-            "rent": [28, 56, 150, 450, 1000, 1200, 1400],
+            "rent": [28, 150, 450, 1000, 1200, 1400],
             "mortgaged": false,
             "mortgage": 160,
             "unmortgage": 176
@@ -902,7 +902,7 @@ function loadProperties() {
             "price": 350,
             "upgrades": 0,
             "ungradeCost": 200,
-            "rent": [35, 70, 175, 500, 1100, 1300, 1500],
+            "rent": [35, 175, 500, 1100, 1300, 1500],
             "mortgaged": false,
             "mortgage": 175,
             "unmortgage": 193
@@ -912,7 +912,7 @@ function loadProperties() {
             "price": 400,
             "upgrades": 0,
             "ungradeCost": 200,
-            "rent": [50, 100, 200, 600, 1400, 1700, 2000],
+            "rent": [50, 200, 600, 1400, 1700, 2000],
             "mortgaged": false,
             "mortgage": 200,
             "unmortgage": 220

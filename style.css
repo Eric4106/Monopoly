@@ -20,6 +20,12 @@ header {
     border-radius: 20px;
 }
 
+footer {
+    padding: 8px;
+    color: #181818;
+    background-image: linear-gradient(to bottom, #8f8, #272);
+}
+
 #Canvas {
     border: 3px solid #5b5;
     cursor: none;
@@ -33,4 +39,8 @@ button {
 h1 {
     font-size: 48px;
     color: #181818;
+}
+
+.small {
+    font-size: 12px;
 }

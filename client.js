@@ -79,16 +79,151 @@ function draw() {
   fill(24);
   textFont("monospace", 20);
   if (d1 != null) {
-    text("Dice rolled: " + d1 + " and " + d2 + " which sum to " + (d1 + d2), 2 * scale + 10, 2 * scale + 25);
+    text("Dice rolled: " + d1 + " and " + d2 + " which sum to " + (d1 + d2), 2.25 * scale, 2.5 * scale);
+    drawDiceButton();
   }
+  else text("Roll Dice", 2.25 * scale, 2.5 * scale);
   
+  tiles.forEach(tile => {
+    if (tile.property != null) {
+      if ((mouseX >= tile.smallBox.x * scale && mouseX <= (tile.smallBox.x + tile.smallBox.width) * scale) && (mouseY >= tile.smallBox.y * scale && mouseY <= (tile.smallBox.y + tile.smallBox.height) * scale)) {
+        drawPropertyText(tile);
+      }
+    }
+  });
+  drawTileText();
   drawChance();
   drawChest();
   drawRailroad();
 
+  drawPlayers();
+
   strokeWeight(2);
   line(mouseX - 10, mouseY, mouseX + 10, mouseY);
   line(mouseX, mouseY - 10, mouseX, mouseY + 10);
+
+  $("#turn").text("It is " + players[turn].name + "'s turn");
+}
+
+function drawPlayers() {
+  strokeWeight(2);
+  players.forEach(player => {
+    fill(player.color);
+    if (tiles[player.tile].shape == "square") {
+      if (tiles[player.tile].type != "jail") {
+        if (players[0] == player) circle((tiles[player.tile].x + .5) * scale, (tiles[player.tile].y + .5) * scale, .4 * scale);
+        if (players[1] == player) circle((tiles[player.tile].x + 1.5) * scale, (tiles[player.tile].y + .5) * scale, .4 * scale);
+        if (players[2] == player) circle((tiles[player.tile].x + .5) * scale, (tiles[player.tile].y + 1.5) * scale, .4 * scale);
+        if (players[3] == player) circle((tiles[player.tile].x + 1.5) * scale, (tiles[player.tile].y + 1.5) * scale, .4 * scale);
+      }
+      else {
+        if (player.inPrison) {
+          if (players[0] == player) circle((tiles[player.tile].smallBox.x + (.5 * tiles[player.tile].smallBox.width / 2)) * scale, (tiles[player.tile].smallBox.y + (.5 * tiles[player.tile].smallBox.height / 2)) * scale, .2 * scale);
+          if (players[1] == player) circle((tiles[player.tile].smallBox.x + (1.5 * tiles[player.tile].smallBox.width / 2)) * scale, (tiles[player.tile].smallBox.y + (.5 * tiles[player.tile].smallBox.height / 2)) * scale, .2 * scale);
+          if (players[2] == player) circle((tiles[player.tile].smallBox.x + (.5 * tiles[player.tile].smallBox.width / 2)) * scale, (tiles[player.tile].smallBox.y + (1.5 * tiles[player.tile].smallBox.height / 2)) * scale, .2 * scale);
+          if (players[3] == player) circle((tiles[player.tile].smallBox.x + (1.5 * tiles[player.tile].smallBox.width / 2)) * scale, (tiles[player.tile].smallBox.y + (1.5 * tiles[player.tile].smallBox.height / 2)) * scale, .2 * scale);
+        }
+        else {
+          if (players[0] == player) circle((tiles[player.tile].x + (.5 * (2 - tiles[player.tile].smallBox.width))) * scale, (tiles[player.tile].y + (1 * (2 / 5))) * scale, .3 * scale);
+          if (players[1] == player) circle((tiles[player.tile].x + (.5 * (2 - tiles[player.tile].smallBox.width))) * scale, (tiles[player.tile].y + (2 * (2 / 5))) * scale, .3 * scale);
+          if (players[2] == player) circle((tiles[player.tile].x + (.5 * (2 - tiles[player.tile].smallBox.width))) * scale, (tiles[player.tile].y + (3 * (2 / 5))) * scale, .3 * scale);
+          if (players[3] == player) circle((tiles[player.tile].x + (.5 * (2 - tiles[player.tile].smallBox.width))) * scale, (tiles[player.tile].y + (4 * (2 / 5))) * scale, .3 * scale);
+        }
+      }
+    }
+    else if (tiles[player.tile].shape == "vRectangle") {
+      if (tiles[player.tile].y == 0) {
+        if (players[0] == player) circle((tiles[player.tile].x + .25) * scale, (tiles[player.tile].y + .25) * scale, .3 * scale);
+        if (players[1] == player) circle((tiles[player.tile].x + .75) * scale, (tiles[player.tile].y + .25) * scale, .3 * scale);
+        if (players[2] == player) circle((tiles[player.tile].x + .25) * scale, (tiles[player.tile].y + .75) * scale, .3 * scale);
+        if (players[3] == player) circle((tiles[player.tile].x + .75) * scale, (tiles[player.tile].y + .75) * scale, .3 * scale);
+      }
+      else {
+        if (players[0] == player) circle((tiles[player.tile].x + .25) * scale, scale + (tiles[player.tile].y + .25) * scale, .3 * scale);
+        if (players[1] == player) circle((tiles[player.tile].x + .75) * scale, scale + (tiles[player.tile].y + .25) * scale, .3 * scale);
+        if (players[2] == player) circle((tiles[player.tile].x + .25) * scale, scale + (tiles[player.tile].y + .75) * scale, .3 * scale);
+        if (players[3] == player) circle((tiles[player.tile].x + .75) * scale, scale + (tiles[player.tile].y + .75) * scale, .3 * scale);
+
+      }
+    }
+    else if (tiles[player.tile].shape == "hRectangle") {
+      if (tiles[player.tile].x == 0) {
+        if (players[0] == player) circle((tiles[player.tile].x + .25) * scale, (tiles[player.tile].y + .25) * scale, .3 * scale);
+        if (players[1] == player) circle((tiles[player.tile].x + .75) * scale, (tiles[player.tile].y + .25) * scale, .3 * scale);
+        if (players[2] == player) circle((tiles[player.tile].x + .25) * scale, (tiles[player.tile].y + .75) * scale, .3 * scale);
+        if (players[3] == player) circle((tiles[player.tile].x + .75) * scale, (tiles[player.tile].y + .75) * scale, .3 * scale);
+      }
+      else {
+        if (players[0] == player) circle(scale + (tiles[player.tile].x + .25) * scale, (tiles[player.tile].y + .25) * scale, .3 * scale);
+        if (players[1] == player) circle(scale + (tiles[player.tile].x + .75) * scale, (tiles[player.tile].y + .25) * scale, .3 * scale);
+        if (players[2] == player) circle(scale + (tiles[player.tile].x + .25) * scale, (tiles[player.tile].y + .75) * scale, .3 * scale);
+        if (players[3] == player) circle(scale + (tiles[player.tile].x + .75) * scale, (tiles[player.tile].y + .75) * scale, .3 * scale);
+
+      }
+    }
+  });
+}
+
+function drawDiceButton() {
+  fill(125, 225, 175);
+  rect(2.75 * scale, 2.85 * scale, 1.6 * scale, .75 * scale);
+  fill(24);
+  textFont("georgia", .55 * scale);
+  text("Move", 2.88 * scale, 3.45 * scale);
+}
+
+function drawTileText() {
+  strokeWeight(2);
+  textFont("georgia", .8 * scale);
+
+  fill(255, 0, 0);
+  translate(11.5 * scale, 12.6 * scale);
+  rotate(-Math.PI / 4);
+  text("GO!", 0, 0);
+  rotate(Math.PI / 4);
+  translate(-11.5 * scale, -12.6 * scale);
+
+  textFont("georgia", .7 * scale);
+  fill(0, 127, 255);
+  translate(11.45 * scale, .425 * scale);
+  rotate(Math.PI / 4);
+  text("Go to", 0, 0);
+  translate(.2 * scale, .7 * scale);
+  text("Jail", 0, 0);
+  translate(-.2 * scale, -.7 * scale);
+  rotate(-Math.PI / 4);
+  translate(-11.45 * scale, -.425 * scale);
+
+  textFont("georgia", .5 * scale);
+  fill(255);
+  translate(.4 * scale, 1.1 * scale);
+  rotate(-Math.PI / 4);
+  text("Free", 0, 0);
+  translate(-.35 * scale, .6 * scale);
+  text("Parking", 0, 0);
+  translate(.35 * scale, -.6 * scale);
+  rotate(Math.PI / 4);
+  translate(-.4 * scale, -1.1 * scale);
+
+  textFont("georgia", .5 * scale);
+  fill(255);
+  translate(1 * scale, 11.8 * scale);
+  text("Jail", 0, 0);
+  translate(-1 * scale, -11.8 * scale);
+}
+
+function drawPropertyText(tile) {
+  strokeWeight(3);
+  textFont("georgia", .8 * scale);
+  fill(tile.color);
+  text(tile.property.name, 2.25 * scale, 4.5 * scale);
+  strokeWeight(1);
+  fill(24);
+  textFont("georgia", .4 * scale);
+  if (properties[tile.property.id].owner != null) text("The current owner is " + players[properties[tile.property.id].owner].name, 2.25 * scale, 5.25 * scale);
+  else text("This property costs M" + properties[tile.property.id].price + " to purchase", 2.25 * scale, 5.25 * scale);
+  textFont("georgia", .35 * scale);
+  text("Current Rent: M" + properties[tile.property.id].rent[properties[tile.property.id].upgrades], 2.25 * scale, 5.75 * scale);
 }
 
 function drawChance() {
@@ -147,7 +282,7 @@ function drawRailroad() {
   fill(24);
 
   translate(6.5 * scale, 6.5 * scale);
-  for (let i = 0; i < 4; i ++) {
+  for (let i = 0; i < 4; i++) {
     text("------------", -6.47 * scale, -.1 * scale);
     translate(0, scale / 6);
     text(" | | | | | | | ", -6.47 * scale, -.1 * scale);
@@ -160,6 +295,7 @@ function drawRailroad() {
 }
 
 function moveToFrom(tile, oldTile) {
+  if (tile >= 40) tile -= 40;
   if (tile < oldTile) {
     moveToWith(tile, true);
   }
@@ -178,9 +314,9 @@ function moveTo(tile) {
 }
 
 function rollDice() {
+  if (d1 != null) return;
   d1 = Math.floor((Math.random() * 6) + 1);
   d2 = Math.floor((Math.random() * 6) + 1);
-  console.log('click');
 }
 
 //https://stackoverflow.com/questions/13382516/getting-scroll-bar-width-using-javascript
@@ -207,6 +343,15 @@ function getScrollbarWidth() {
 
 function mousePressed(event) {
   if (event.target.nodeName === "CANVAS") {
+    if (d1 != null) {
+      if ((mouseX >= 2.75 * scale && mouseX <= (2.75 + 1.6) * scale) && (mouseY >= 2.85 * scale && mouseY <= (2.85 + .75) * scale)) {
+        moveToFrom(players[turn].tile + d1 + d2, players[turn].tile);
+        turn++;
+        if (turn >= players.length) turn = 0;
+        d1 = null;
+        d2 = null;
+      }
+    }
     tiles.forEach(tile => {
       if (tile.smallBox != null) {
         if ((mouseX >= tile.smallBox.x * scale && mouseX <= (tile.smallBox.x + tile.smallBox.width) * scale) && (mouseY >= tile.smallBox.y * scale && mouseY <= (tile.smallBox.y + tile.smallBox.height) * scale)) {
