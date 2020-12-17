@@ -77,7 +77,7 @@ function draw() {
 
   strokeWeight(1);
   fill(24);
-  textFont("monospace", 20);
+  textFont("monospace", .45 * scale);
   if (d1 != null) {
     text("Dice rolled: " + d1 + " and " + d2 + " which sum to " + (d1 + d2), 2.25 * scale, 2.5 * scale);
     drawDiceButton();
