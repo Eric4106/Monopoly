@@ -1,4 +1,4 @@
-var canvasSize, canvasSize, scale;
+var canvasSize, scale;
 var font;
 var d1, d2;
 var players = [];
